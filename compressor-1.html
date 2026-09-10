@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>فشرده‌ساز — عکس و ویدیو</title>
+<style>
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root{
+  --bg: #131316;
+  --surface: #1C1C21;
+  --surface-2: #232329;
+  --border: #2E2E36;
+  --border-soft: #26262C;
+  --text: #EDEDF0;
+  --text-dim: #8B8B96;
+  --text-faint: #5C5C66;
+  --accent: #4FD1C5;
+  --accent-dim: #3AA79D;
+  --accent-wash: rgba(79, 209, 197, 0.12);
+  --danger: #E5697A;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -8px rgba(0,0,0,0.5);
+}
+
+*{ box-sizing: border-box; margin:0; padding:0; }
+
+html,body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Vazirmatn', -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+body{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding: 28px 16px 80px;
+}
+
+.app{
+  width:100%;
+  max-width: 760px;
+  display:flex;
+  flex-direction:column;
+  gap: 20px;
+}
+
+/* header */
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 4px 2px 8px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand-mark{
+  width:34px; height:34px;
+  border-radius: 9px;
+  background: linear-gradient(155deg, var(--accent) 0%, var(--accent-dim) 100%);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.brand-mark svg{ width:18px; height:18px; }
+.brand-title{
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.brand-sub{
+  font-size: 12.5px;
+  color: var(--text-faint);
+  margin-top: 1px;
+}
+
+.privacy-pill{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  padding: 6px 11px;
+  border-radius: 100px;
+  white-space:nowrap;
+}
+.privacy-pill svg{ width:12px; height:12px; flex-shrink:0; color: var(--accent); }
+
+/* dropzone */
+.dropzone{
+  position:relative;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: 44px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.dropzone:hover{ border-color: #3A3A44; }
+.dropzone.drag{
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+.dz-icon{
+  width:44px; height:44px;
+  margin: 0 auto 16px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  display:flex; align-items:center; justify-content:center;
+}
+.dz-icon svg{ width:20px; height:20px; color: var(--text-dim); }
+.dz-title{
+  font-size: 15.5px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.dz-title b{ color: var(--accent); font-weight: 600; }
+.dz-sub{
+  font-size: 13px;
+  color: var(--text-faint);
+}
+#file-input{ display:none; }
+
+/* settings row */
+.settings{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.setting-card{
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+.setting-label{
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-bottom: 10px;
+}
+.seg{
+  display:flex;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  gap: 2px;
+}
+.seg button{
+  flex:1;
+  border:none;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 7px 4px;
+  border-radius: 6px;
+  cursor:pointer;
+  transition: background .12s ease, color .12s ease;
+}
+.seg button.active{
+  background: var(--surface-2);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.slider-row{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+.slider-row input[type=range]{
+  flex:1;
+  accent-color: var(--accent);
+  height: 4px;
+}
+.slider-val{
+  font-size: 12.5px;
+  color: var(--accent);
+  font-weight: 600;
+  min-width: 34px;
+  text-align:center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* queue */
+.queue{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+.queue-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 0 2px;
+}
+.queue-title{
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.queue-actions{
+  display:flex;
+  gap:8px;
+}
+.btn-text{
+  background:none; border:none;
+  color: var(--text-dim);
+  font-family:inherit;
+  font-size: 12.5px;
+  cursor:pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.btn-text:hover{ color: var(--text); background: var(--surface); }
+
+.file-card{
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+.file-top{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+.file-thumb{
+  width: 42px; height:42px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  border: 1px solid var(--border-soft);
+}
+.file-thumb img{ width:100%; height:100%; object-fit:cover; }
+.file-thumb svg{ width:17px; height:17px; color: var(--text-faint); }
+
+.file-info{
+  flex:1;
+  min-width:0;
+}
+.file-name{
+  font-size: 13.5px;
+  font-weight:500;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.file-meta{
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 2px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.file-meta .arrow-size{
+  color: var(--accent);
+  font-weight:600;
+}
+.file-meta .saved-tag{
+  background: var(--accent-wash);
+  color: var(--accent);
+  padding: 1px 7px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight:600;
+}
+
+.file-status-icon{
+  width: 28px; height:28px;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.spinner{
+  width:16px; height:16px;
+  border-radius:50%;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin .7s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+.file-remove{
+  background:none; border:none;
+  color: var(--text-faint);
+  cursor:pointer;
+  width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:9px;
+  flex-shrink:0;
+  -webkit-tap-highlight-color: transparent;
+}
+.file-remove:hover{ background: var(--surface-2); color: var(--danger); }
+.file-remove svg{ width:15px; height:15px; }
+
+.progress-track{
+  height: 5px;
+  background: var(--bg);
+  border-radius: 100px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background: var(--accent);
+  border-radius: 100px;
+  width:0%;
+  transition: width .2s ease;
+}
+.progress-fill.error{ background: var(--danger); }
+
+.file-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+.file-note{
+  font-size: 12px;
+  color: var(--text-faint);
+}
+.file-note.error-text{ color: var(--danger); }
+
+.btn-download{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background: var(--accent-wash);
+  color: var(--accent);
+  border: none;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 13px;
+  border-radius: 8px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition: background .12s ease;
+}
+.btn-download:hover{ background: rgba(79,209,197,0.2); }
+.btn-download svg{ width:13px; height:13px; }
+
+/* footer actions */
+.footer-actions{
+  display:flex;
+  gap: 10px;
+}
+.btn-primary{
+  flex:1;
+  background: var(--accent);
+  color: #0B1615;
+  border:none;
+  font-family:inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px;
+  border-radius: var(--radius-md);
+  cursor:pointer;
+  transition: background .12s ease, opacity .12s ease;
+}
+.btn-primary:hover{ background: #5EDAD0; }
+.btn-primary:disabled{ opacity:.4; cursor:not-allowed; }
+
+.btn-secondary{
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  color: var(--text-dim);
+  font-family:inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 13px 18px;
+  border-radius: var(--radius-md);
+  cursor:pointer;
+}
+.btn-secondary:hover{ background: var(--surface-2); color: var(--text); }
+
+.empty-hint{
+  text-align:center;
+  color: var(--text-faint);
+  font-size: 12.5px;
+  padding: 4px 0 0;
+}
+
+/* engine loading banner */
+.engine-banner{
+  display:none;
+  align-items:center;
+  gap:10px;
+  background: var(--surface);
+  border:1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+.engine-banner.show{ display:flex; }
+.engine-banner .spinner{ flex-shrink:0; }
+
+.warn-banner{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  background: rgba(229,105,122,0.1);
+  border:1px solid rgba(229,105,122,0.28);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: #F0A6B0;
+  line-height: 1.6;
+}
+.warn-banner svg{ width:16px; height:16px; flex-shrink:0; margin-top:1px; color: var(--danger); }
+.warn-banner b{ color: #fff; }
+
+@media (max-width: 480px){
+  .settings{ grid-template-columns: 1fr; }
+  .brand-sub{ display:none; }
+  .btn-primary, .btn-secondary{ padding: 14px; font-size: 14.5px; }
+  .seg button{ padding: 9px 4px; }
+  .dropzone{ padding: 36px 16px; }
+  .file-bottom{ flex-wrap: wrap; }
+  .btn-download{ padding: 8px 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="app-header">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0B1615" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 13 12 18 17 13"></polyline><polyline points="7 6 12 11 17 6"></polyline></svg>
+      </div>
+      <div>
+        <div class="brand-title">فشرده‌ساز</div>
+        <div class="brand-sub">عکس و ویدیو، مستقیم در مرورگر</div>
+      </div>
+    </div>
+    <div class="privacy-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5.2 3.4 9.4 8 11 4.6-1.6 8-5.8 8-11V5l-8-3z"></path></svg>
+      آپلود نمی‌شود
+    </div>
+  </div>
+
+  <div class="dropzone" id="dropzone">
+    <div class="dz-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+    </div>
+    <div class="dz-title">فایل‌ها را رها کنید یا <b>انتخاب کنید</b></div>
+    <div class="dz-sub">JPG، PNG، WebP، MP4، MOV، WebM — همه با هم</div>
+    <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/webm,video/x-matroska">
+  </div>
+
+  <div class="settings">
+    <div class="setting-card">
+      <div class="setting-label">کیفیت عکس</div>
+      <div class="seg" id="image-quality-seg">
+        <button data-val="0.5">کم‌حجم</button>
+        <button data-val="0.72" class="active">متعادل</button>
+        <button data-val="0.88">کیفیت بالا</button>
+      </div>
+    </div>
+    <div class="setting-card">
+      <div class="setting-label">فشرده‌سازی ویدیو</div>
+      <div class="seg" id="video-quality-seg">
+        <button data-val="32">کم‌حجم</button>
+        <button data-val="26" class="active">متعادل</button>
+        <button data-val="20">کیفیت بالا</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="engine-banner" id="engine-banner">
+    <div class="spinner"></div>
+    <span id="engine-banner-text">در حال آماده‌سازی موتور فشرده‌سازی ویدیو…</span>
+  </div>
+
+  <div class="warn-banner" id="mobile-warn-banner" style="display:none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
+    <span id="mobile-warn-text"></span>
+  </div>
+
+  <div class="queue" id="queue" style="display:none;">
+    <div class="queue-header">
+      <div class="queue-title" id="queue-title">۰ فایل</div>
+      <div class="queue-actions">
+        <button class="btn-text" id="clear-all">حذف همه</button>
+      </div>
+    </div>
+    <div id="queue-list" style="display:flex; flex-direction:column; gap:10px;"></div>
+  </div>
+
+  <div class="empty-hint" id="empty-hint">هنوز فایلی اضافه نشده</div>
+
+  <div class="footer-actions" id="footer-actions" style="display:none;">
+    <button class="btn-secondary" id="add-more-btn">افزودن فایل</button>
+    <button class="btn-primary" id="compress-all-btn">فشرده‌سازی همه</button>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
+<script src="https://unpkg.com/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  // ---------- State ----------
+  let items = [];        // {id, file, kind, status, progress, outBlob, outSize, error, thumbUrl}
+  let idCounter = 0;
+  let imageQuality = 0.72;
+  let videoCrf = 26;
+  let ffmpeg = null;
+  let ffmpegReady = false;
+  let ffmpegLoading = false;
+  let ffmpegLoadFailed = false;
+
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  const MOBILE_VIDEO_LIMIT_MB = 300; // safe-ish ceiling for in-browser wasm transcoding on phones
+  const MOBILE_VIDEO_LIMIT = MOBILE_VIDEO_LIMIT_MB * 1024 * 1024;
+
+  // ---------- DOM ----------
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file-input');
+  const queueEl = document.getElementById('queue');
+  const queueList = document.getElementById('queue-list');
+  const queueTitle = document.getElementById('queue-title');
+  const emptyHint = document.getElementById('empty-hint');
+  const footerActions = document.getElementById('footer-actions');
+  const compressAllBtn = document.getElementById('compress-all-btn');
+  const addMoreBtn = document.getElementById('add-more-btn');
+  const clearAllBtn = document.getElementById('clear-all');
+  const imgSeg = document.getElementById('image-quality-seg');
+  const vidSeg = document.getElementById('video-quality-seg');
+  const engineBanner = document.getElementById('engine-banner');
+  const engineBannerText = document.getElementById('engine-banner-text');
+  const mobileWarnBanner = document.getElementById('mobile-warn-banner');
+  const mobileWarnText = document.getElementById('mobile-warn-text');
+
+  // ---------- Helpers ----------
+  function fmtSize(bytes){
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1024*1024) return (bytes/1024).toFixed(0) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
+  }
+  function kindOf(file){
+    if(file.type.startsWith('image/')) return 'image';
+    if(file.type.startsWith('video/')) return 'video';
+    return null;
+  }
+  function extOf(name){
+    const m = name.match(/\.([a-zA-Z0-9]+)$/);
+    return m ? m[1].toLowerCase() : '';
+  }
+  function baseName(name){
+    return name.replace(/\.[^.]+$/, '');
+  }
+  function svgIconImage(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg>';
+  }
+  function svgIconVideo(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2"></rect></svg>';
+  }
+  function svgIconDownload(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>';
+  }
+  function svgIconClose(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="M6 6l12 12"></path></svg>';
+  }
+
+  // ---------- Rendering ----------
+  function render(){
+    if(items.length === 0){
+      queueEl.style.display = 'none';
+      emptyHint.style.display = 'block';
+      footerActions.style.display = 'none';
+      return;
+    }
+    emptyHint.style.display = 'none';
+    queueEl.style.display = 'flex';
+    footerActions.style.display = 'flex';
+    queueTitle.textContent = items.length + ' فایل';
+
+    const anyPending = items.some(i => i.status === 'pending');
+    compressAllBtn.disabled = !anyPending;
+    compressAllBtn.textContent = anyPending ? 'فشرده‌سازی همه' : 'همه فشرده شدند';
+
+    queueList.innerHTML = '';
+    items.forEach(item => queueList.appendChild(renderCard(item)));
+  }
+
+  function renderCard(item){
+    const card = document.createElement('div');
+    card.className = 'file-card';
+
+    const top = document.createElement('div');
+    top.className = 'file-top';
+
+    const thumb = document.createElement('div');
+    thumb.className = 'file-thumb';
+    if(item.thumbUrl){
+      thumb.innerHTML = '<img src="'+item.thumbUrl+'" alt="">';
+    } else {
+      thumb.innerHTML = item.kind === 'image' ? svgIconImage() : svgIconVideo();
+    }
+    top.appendChild(thumb);
+
+    const info = document.createElement('div');
+    info.className = 'file-info';
+    const nameEl = document.createElement('div');
+    nameEl.className = 'file-name';
+    nameEl.textContent = item.file.name;
+    info.appendChild(nameEl);
+
+    const meta = document.createElement('div');
+    meta.className = 'file-meta';
+    if(item.status === 'done' && item.outSize){
+      const pct = Math.round((1 - item.outSize/item.file.size) * 100);
+      meta.innerHTML = fmtSize(item.file.size) + ' <span class="arrow-size">→ ' + fmtSize(item.outSize) + '</span>' +
+        (pct > 0 ? ' <span class="saved-tag">' + pct + '% کمتر</span>' : '');
+    } else if(item.status === 'processing'){
+      meta.textContent = fmtSize(item.file.size) + ' — در حال پردازش…';
+    } else if(item.status === 'error'){
+      meta.textContent = fmtSize(item.file.size);
+    } else {
+      meta.textContent = fmtSize(item.file.size) + ' — آماده';
+    }
+    info.appendChild(meta);
+    top.appendChild(info);
+
+    const statusIcon = document.createElement('div');
+    statusIcon.className = 'file-status-icon';
+    if(item.status === 'processing'){
+      statusIcon.innerHTML = '<div class="spinner"></div>';
+      top.appendChild(statusIcon);
+    } else if(item.status !== 'done'){
+      const rm = document.createElement('button');
+      rm.className = 'file-remove';
+      rm.innerHTML = svgIconClose();
+      rm.onclick = () => removeItem(item.id);
+      top.appendChild(rm);
+    }
+
+    card.appendChild(top);
+
+    if(item.status === 'processing' || item.status === 'done'){
+      const track = document.createElement('div');
+      track.className = 'progress-track';
+      const fill = document.createElement('div');
+      fill.className = 'progress-fill' + (item.status === 'error' ? ' error' : '');
+      fill.style.width = (item.status === 'done' ? 100 : item.progress) + '%';
+      track.appendChild(fill);
+      card.appendChild(track);
+    }
+
+    if(item.status === 'error'){
+      const bottom = document.createElement('div');
+      bottom.className = 'file-bottom';
+      const note = document.createElement('div');
+      note.className = 'file-note error-text';
+      note.textContent = item.error || 'خطا در پردازش این فایل';
+      bottom.appendChild(note);
+      const rm = document.createElement('button');
+      rm.className = 'file-remove';
+      rm.innerHTML = svgIconClose();
+      rm.onclick = () => removeItem(item.id);
+      bottom.appendChild(rm);
+      card.appendChild(bottom);
+    }
+
+    if(item.status === 'done'){
+      const bottom = document.createElement('div');
+      bottom.className = 'file-bottom';
+      const note = document.createElement('div');
+      note.className = 'file-note';
+      note.textContent = 'آماده دانلود';
+      bottom.appendChild(note);
+
+      const dl = document.createElement('button');
+      dl.className = 'btn-download';
+      dl.innerHTML = svgIconDownload() + '<span>دانلود</span>';
+      dl.onclick = () => downloadItem(item);
+      bottom.appendChild(dl);
+
+      card.appendChild(bottom);
+    }
+
+    return card;
+  }
+
+  // ---------- Queue management ----------
+  function addFiles(fileList){
+    const files = Array.from(fileList);
+    files.forEach(file => {
+      const kind = kindOf(file);
+      if(!kind) return; // skip unsupported silently-ish
+      const item = {
+        id: ++idCounter,
+        file, kind,
+        status: 'pending',
+        progress: 0,
+        outBlob: null,
+        outSize: null,
+        error: null,
+        oversizedOnMobile: isMobile && kind === 'video' && file.size > MOBILE_VIDEO_LIMIT,
+        thumbUrl: kind === 'image' ? URL.createObjectURL(file) : null
+      };
+      items.push(item);
+    });
+    updateMobileWarning();
+    render();
+  }
+
+  function updateMobileWarning(){
+    if(!isMobile){ mobileWarnBanner.style.display = 'none'; return; }
+    const big = items.find(i => i.oversizedOnMobile && i.status === 'pending');
+    if(big){
+      mobileWarnText.innerHTML = '<b>' + big.file.name + '</b> حجمش بیشتر از حد امن برای فشرده‌سازی روی گوشیه. ممکنه مرورگر هنگ کنه یا کرش کنه — بهتره یا حذفش کنید یا از دسکتاپ استفاده کنید.';
+      mobileWarnBanner.style.display = 'flex';
+    } else {
+      mobileWarnBanner.style.display = 'none';
+    }
+  }
+
+  function removeItem(id){
+    const idx = items.findIndex(i => i.id === id);
+    if(idx === -1) return;
+    const item = items[idx];
+    if(item.thumbUrl) URL.revokeObjectURL(item.thumbUrl);
+    items.splice(idx, 1);
+    updateMobileWarning();
+    render();
+  }
+
+  function clearAll(){
+    items.forEach(i => { if(i.thumbUrl) URL.revokeObjectURL(i.thumbUrl); });
+    items = [];
+    updateMobileWarning();
+    render();
+  }
+
+  function downloadItem(item){
+    const a = document.createElement('a');
+    const url = URL.createObjectURL(item.outBlob);
+    const ext = item.kind === 'image' ? (item.outExt || extOf(item.file.name)) : 'mp4';
+    a.href = url;
+    a.download = baseName(item.file.name) + '-compressed.' + ext;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  // ---------- Image compression ----------
+  function compressImage(item){
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(item.file);
+      img.onload = () => {
+        try{
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          let mime = item.file.type;
+          let ext = extOf(item.file.name);
+          // PNG without transparency benefit stays PNG only if small; otherwise convert large PNGs to JPEG for real gains
+          if(mime === 'image/png'){
+            // keep PNG (lossless) but if quality preset is aggressive, convert to JPEG for big savings
+            if(imageQuality <= 0.6){
+              mime = 'image/jpeg';
+              ext = 'jpg';
+              // fill white behind transparency since JPEG has no alpha
+              const ctx2 = canvas.getContext('2d');
+              ctx2.globalCompositeOperation = 'destination-over';
+              ctx2.fillStyle = '#FFFFFF';
+              ctx2.fillRect(0,0,canvas.width, canvas.height);
+            }
+          } else if(mime !== 'image/webp' && mime !== 'image/jpeg'){
+            mime = 'image/jpeg';
+            ext = 'jpg';
+          }
+
+          canvas.toBlob(blob => {
+            URL.revokeObjectURL(url);
+            if(!blob){ reject(new Error('تبدیل تصویر ناموفق بود')); return; }
+            item.outExt = ext;
+            resolve(blob);
+          }, mime, imageQuality);
+        } catch(e){
+          URL.revokeObjectURL(url);
+          reject(e);
+        }
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('خواندن تصویر ناموفق بود')); };
+      img.src = url;
+    });
+  }
+
+  // ---------- Video compression (FFmpeg.wasm) ----------
+  async function ensureFFmpeg(){
+    if(ffmpegReady) return;
+    if(ffmpegLoadFailed) throw new Error('ENGINE_LOAD_FAILED');
+    if(ffmpegLoading){
+      // wait until ready or failed
+      await new Promise(res => {
+        const check = setInterval(() => {
+          if(ffmpegReady || ffmpegLoadFailed){ clearInterval(check); res(); }
+        }, 200);
+      });
+      if(ffmpegLoadFailed) throw new Error('ENGINE_LOAD_FAILED');
+      return;
+    }
+    ffmpegLoading = true;
+    engineBanner.classList.add('show');
+    engineBannerText.textContent = 'در حال آماده‌سازی موتور فشرده‌سازی ویدیو…';
+    try{
+      const { FFmpeg } = FFmpegWASM;
+      const { toBlobURL } = FFmpegUtil;
+      ffmpeg = new FFmpeg();
+      ffmpeg.on('log', ({message}) => { /* console.log(message); */ });
+
+      const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+      await ffmpeg.load({
+        coreURL: await toBlobURL(baseURL + '/ffmpeg-core.js', 'text/javascript'),
+        wasmURL: await toBlobURL(baseURL + '/ffmpeg-core.wasm', 'application/wasm'),
+      });
+      ffmpegReady = true;
+      ffmpegLoading = false;
+      engineBanner.classList.remove('show');
+    } catch(e){
+      ffmpegLoading = false;
+      ffmpegLoadFailed = true;
+      engineBanner.classList.remove('show');
+      throw new Error('ENGINE_LOAD_FAILED');
+    }
+  }
+
+  async function compressVideo(item){
+    await ensureFFmpeg();
+
+    const inName = 'in_' + item.id + '.' + (extOf(item.file.name) || 'mp4');
+    const outName = 'out_' + item.id + '.mp4';
+
+    const data = await FFmpegUtil.fetchFile(item.file);
+    await ffmpeg.writeFile(inName, data);
+
+    const progressHandler = ({progress}) => {
+      const pct = Math.min(99, Math.max(item.progress, Math.round(progress * 100)));
+      item.progress = pct;
+      updateCardProgress(item);
+    };
+    ffmpeg.on('progress', progressHandler);
+
+    try{
+      const maxWidth = isMobile ? 1280 : 1920;
+      await ffmpeg.exec([
+        '-i', inName,
+        '-c:v', 'libx264',
+        '-crf', String(videoCrf),
+        '-preset', 'veryfast',
+        '-vf', "scale='min(" + maxWidth + ",iw)':-2",
+        '-c:a', 'aac',
+        '-b:a', '128k',
+        '-movflags', '+faststart',
+        outName
+      ]);
+
+      const outData = await ffmpeg.readFile(outName);
+      const blob = new Blob([outData.buffer], { type: 'video/mp4' });
+
+      await ffmpeg.deleteFile(inName);
+      await ffmpeg.deleteFile(outName);
+      ffmpeg.off('progress', progressHandler);
+
+      return blob;
+    } catch(e){
+      ffmpeg.off('progress', progressHandler);
+      try{ await ffmpeg.deleteFile(inName); }catch(_){}
+      try{ await ffmpeg.deleteFile(outName); }catch(_){}
+      throw e;
+    }
+  }
+
+  function updateCardProgress(item){
+    // Lightweight partial DOM update to avoid full re-render thrash during video progress
+    const idx = items.findIndex(i => i.id === item.id);
+    if(idx === -1) return;
+    const card = queueList.children[idx];
+    if(!card) return;
+    const fill = card.querySelector('.progress-fill');
+    if(fill) fill.style.width = item.progress + '%';
+    const meta = card.querySelector('.file-meta');
+    if(meta) meta.textContent = fmtSize(item.file.size) + ' — در حال پردازش… ' + item.progress + '%';
+  }
+
+  // ---------- Processing pipeline ----------
+  async function processItem(item){
+    item.status = 'processing';
+    item.progress = item.kind === 'image' ? 50 : 0;
+    render();
+    try{
+      let blob;
+      if(item.kind === 'image'){
+        blob = await compressImage(item);
+      } else {
+        blob = await compressVideo(item);
+      }
+      item.outBlob = blob;
+      item.outSize = blob.size;
+      // Guard: if "compressed" ended up larger (can happen on already-optimized files), keep original
+      if(item.outSize >= item.file.size && item.kind === 'image'){
+        item.outBlob = item.file;
+        item.outSize = item.file.size;
+      }
+      item.status = 'done';
+      item.progress = 100;
+    } catch(e){
+      console.error(e);
+      item.status = 'error';
+      if(e && e.message === 'ENGINE_LOAD_FAILED'){
+        item.error = 'موتور ویدیو لود نشد. اتصال اینترنت یا مرورگر رو چک کنید.';
+      } else if(item.kind === 'video'){
+        item.error = isMobile
+          ? 'پردازش ویدیو ناموفق بود — احتمالاً کمبود حافظه گوشی. فایل کوچک‌تر امتحان کنید.'
+          : 'فشرده‌سازی ویدیو ناموفق بود. ممکن است فرمت پشتیبانی نشود.';
+      } else {
+        item.error = 'فشرده‌سازی تصویر ناموفق بود.';
+      }
+    }
+    render();
+  }
+
+  async function processAll(){
+    const pending = items.filter(i => i.status === 'pending');
+    if(pending.length === 0) return;
+
+    if(isMobile){
+      const bigOnes = pending.filter(i => i.oversizedOnMobile);
+      if(bigOnes.length > 0){
+        const ok = confirm(
+          'حجم ' + bigOnes.length + ' ویدیو بیشتر از حد امن برای گوشیه (بالای ' + MOBILE_VIDEO_LIMIT_MB + ' مگابایت).\n' +
+          'ممکنه مرورگر کند بشه یا کرش کنه. ادامه بدیم؟'
+        );
+        if(!ok) return;
+      }
+    }
+
+    const hasVideo = pending.some(i => i.kind === 'video');
+    if(hasVideo && !ffmpegReady){
+      engineBannerText.textContent = 'در حال آماده‌سازی موتور فشرده‌سازی ویدیو…';
+    }
+
+    // Sequential processing: safest for memory on mobile, and ffmpeg only supports one job at a time anyway
+    for(const item of pending){
+      await processItem(item);
+    }
+  }
+
+  // ---------- Event wiring ----------
+  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropzone.classList.remove('drag');
+    if(e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener('change', () => {
+    if(fileInput.files.length) addFiles(fileInput.files);
+    fileInput.value = '';
+  });
+
+  addMoreBtn.addEventListener('click', () => fileInput.click());
+  clearAllBtn.addEventListener('click', clearAll);
+  compressAllBtn.addEventListener('click', processAll);
+
+  imgSeg.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      imgSeg.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      imageQuality = parseFloat(btn.dataset.val);
+    });
+  });
+  vidSeg.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      vidSeg.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      videoCrf = parseInt(btn.dataset.val, 10);
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
